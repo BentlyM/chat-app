@@ -120,7 +120,7 @@ const SignUp = () => {
             alt="Sign Up"
             style={{ maxWidth: '100%', height: 'auto' }}
           />
-          <Link href="#" sx={{ mt: 2 }}>
+          <Link href="/login" sx={{ mt: 2 }}>
             I am already a member
           </Link>
         </Box>

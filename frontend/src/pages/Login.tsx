@@ -45,7 +45,7 @@ const Login = () => {
             alt="Sign In"
             style={{ maxWidth: '100%', height: 'auto' }}
           />
-          <Link href="#" sx={{ mt: 2 }}>
+          <Link href="/signup" sx={{ mt: 2 }}>
             Create an account
           </Link>
         </Box>
