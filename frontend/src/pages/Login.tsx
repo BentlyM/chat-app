@@ -1,47 +1,103 @@
-import { Link } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Box } from '@mui/material';
+import {
+  Container,
+  Box,
+  Typography,
+  TextField,
+  Checkbox,
+  Button,
+  FormControlLabel,
+  Link,
+} from '@mui/material';
 
 const Login = () => {
-	return (
-		<Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh' }}>
-			<Box sx={{ padding: 4, borderRadius: 2, boxShadow: 3, backgroundColor: 'rgba(128, 128, 128, 0.5)' }}>
-				<Typography variant="h4" align="center" gutterBottom>
-					Login <span style={{ color: '#2196F3' }}>ChatApp</span>
-				</Typography>
+  return (
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        minWidth: '80%',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          borderRadius: '8px',
+          padding: '20px',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            flex: 1,
+          }}
+        >
+          <img
+            src="signin-image.jpg"
+            alt="Sign In"
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
+          <Link href="#" sx={{ mt: 2 }}>
+            Create an account
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'start',
+            flex: 1,
+            height: 'fit-content',
+          }}
+        >
+          <Typography variant="h4" sx={{ fontWeight: 'bolder', mb: 2 }}>
+            Log In
+          </Typography>
 
-				<form>
-					<Box marginBottom={2}>
-						<TextField
-							label="Username"
-							placeholder="Enter username"
-							variant="outlined"
-							fullWidth
-						/>
-					</Box>
-
-					<Box marginBottom={2}>
-						<TextField
-							label="Password"
-							placeholder="Enter Password"
-							type="password"
-							variant="outlined"
-							fullWidth
-						/>
-					</Box>
-
-					<Link to="/signup" style={{ textDecoration: 'none', marginBottom: 16, display: 'block', textAlign: 'center' }}>
-						<Typography variant="body2" color="white" sx={{ '&:hover': { color: '#2196F3' } }}>
-							{"Don't"} have an account?
-						</Typography>
-					</Link>
-
-					<Button variant="contained" color="primary" fullWidth>
-						Login
-					</Button>
-				</form>
-			</Box>
-		</Container>
-	);
+          <form id="login-form">
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                sx={{ width: '250px' }} // Adjust the width here
+                label="Your Name"
+                variant="outlined"
+                name="your_name"
+                required
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                sx={{ width: '250px' }} // Adjust the width here
+                label="Password"
+                variant="outlined"
+                type="password"
+                name="your_pass"
+                required
+              />
+            </Box>
+            <FormControlLabel
+              control={<Checkbox name="remember-me" color="primary" />}
+              label="Remember me"
+            />
+            <Box sx={{ mt: 2 }}>
+              <Button type="submit" variant="contained" color="primary">
+                Log In
+              </Button>
+            </Box>
+          </form>
+        </Box>
+      </div>
+    </Container>
+  );
 };
 
 export default Login;
