@@ -8,8 +8,16 @@ import {
   FormControlLabel,
   Link,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 const SignUp = () => {
+  const {authUser, setAuthUser, isLoading} = useAuthContext();
+  const navigate = useNavigate();
+
+  if(isLoading) return null;
+  if(authUser)return navigate('/');
+
   return (
     <Container
       maxWidth="sm"
