@@ -52,7 +52,7 @@ const SignUp = () => {
                 sx={{ width: '250px' }} // Adjust the width here
                 label="Your Name"
                 variant="outlined"
-                name="name"
+                name="fullName"
                 required
               />
             </Box>
@@ -60,10 +60,10 @@ const SignUp = () => {
               <TextField
                 fullWidth
                 sx={{ width: '250px' }} // Adjust the width here
-                label="Your Email"
+                label="Your Username"
                 variant="outlined"
-                type="email"
-                name="email"
+                type="text"
+                name="username"
                 required
               />
             </Box>
@@ -74,7 +74,7 @@ const SignUp = () => {
                 label="Password"
                 variant="outlined"
                 type="password"
-                name="pass"
+                name="password"
                 required
               />
             </Box>
@@ -85,7 +85,7 @@ const SignUp = () => {
                 label="Repeat Password"
                 variant="outlined"
                 type="password"
-                name="re_pass"
+                name="confirmPassword"
                 required
               />
             </Box>

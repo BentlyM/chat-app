@@ -67,9 +67,9 @@ const Login = () => {
               <TextField
                 fullWidth
                 sx={{ width: '250px' }} // Adjust the width here
-                label="Your Name"
+                label="Username"
                 variant="outlined"
-                name="your_name"
+                name="username"
                 required
               />
             </Box>
@@ -80,7 +80,7 @@ const Login = () => {
                 label="Password"
                 variant="outlined"
                 type="password"
-                name="your_pass"
+                name="password"
                 required
               />
             </Box>
