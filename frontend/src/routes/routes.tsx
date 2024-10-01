@@ -21,7 +21,7 @@ const routes: Route[] = [
         element: <SignUp />,
     },
     {
-        path: 'login',
+        path: '/login',
         element: <Login />
     }
 ];

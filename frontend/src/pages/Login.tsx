@@ -12,11 +12,10 @@ import { useAuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const {authUser, setAuthUser, isLoading} = useAuthContext();
+  const {authUser} = useAuthContext();
   const navigate = useNavigate();
 
-  if(isLoading) return null;
-  if(authUser)return navigate('/');
+  if(authUser) navigate('/');
 
   return (
     <Container

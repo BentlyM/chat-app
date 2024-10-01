@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 
 type AuthUserType = {
 	id: string;
@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		const fetchAuthUser = async () => {
 			try {
-				const res = await fetch("/api/auth/me");
+				const res = await fetch("http://127.0.0.1:5000/api/auth/me");
 				const data = await res.json();
 				if (!res.ok) {
 					throw new Error(data.error);
@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 			} catch (error) {
 				console.error(error);
                 if(error instanceof Error){
-                    // toast.error(error.message);
+                    toast.error(error.message);
                 }
 			} finally {
 				setIsLoading(false);

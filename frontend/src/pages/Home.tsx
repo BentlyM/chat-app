@@ -5,18 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
 const Home = () => {
-    const {authUser, setAuthUser, isLoading} = useAuthContext();
+    const {authUser} = useAuthContext();
     const navigate = useNavigate();
-
-    if(isLoading) return null;
-    if(!authUser)return navigate('/login');
+    
+    if(!authUser) navigate('/login');
+    
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100%'}}>
             <AppBar position="static" sx={{ backgroundColor: '#1976d2' }}>
                 <Toolbar>
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                        Messaging App
+                        <a href='/' style={{textDecoration: 'none', color:'white'}}>Messaging App</a>
                     </Typography>
                 </Toolbar>
             </AppBar>

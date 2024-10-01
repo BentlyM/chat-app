@@ -7,16 +7,36 @@ import {
   Button,
   FormControlLabel,
   Link,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
+import { useState } from 'react';
+import useSignup from '../hooks/useSignup';
 
 const SignUp = () => {
-  const {authUser, setAuthUser, isLoading} = useAuthContext();
-  const navigate = useNavigate();
+  const { authUser } = useAuthContext();
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  })
 
-  if(isLoading) return null;
-  if(authUser)return navigate('/');
+  const {loading,signup} = useSignup()
+
+  const navigate = useNavigate();
+  
+  if (authUser) navigate('/');
+
+  const handleSubmitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    signup(inputs);
+  }
 
   return (
     <Container
@@ -35,7 +55,7 @@ const SignUp = () => {
           backgroundColor: 'white',
           display: 'flex',
           alignItems: 'center',
-          boxShadow: ' 0 4px 12px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
           borderRadius: '8px',
           padding: '20px',
         }}
@@ -53,50 +73,73 @@ const SignUp = () => {
             Sign Up
           </Typography>
 
-          <form id="register-form">
+          <form id="register-form" onSubmit={handleSubmitForm}>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
-                sx={{ width: '250px' }} // Adjust the width here
+                sx={{ width: '250px' }}
                 label="Your Name"
                 variant="outlined"
                 name="fullName"
+                value={inputs.fullName}
+                onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
                 required
               />
             </Box>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
-                sx={{ width: '250px' }} // Adjust the width here
+                sx={{ width: '250px' }}
                 label="Your Username"
                 variant="outlined"
                 type="text"
                 name="username"
+                value={inputs.username}
+                onChange={(e) => setInputs({...inputs, username: e.target.value})}
                 required
               />
             </Box>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
-                sx={{ width: '250px' }} // Adjust the width here
+                sx={{ width: '250px' }}
                 label="Password"
                 variant="outlined"
                 type="password"
                 name="password"
+                value={inputs.password}
+                onChange={(e) => setInputs({...inputs, password: e.target.value})}
                 required
               />
             </Box>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
-                sx={{ width: '250px' }} // Adjust the width here
+                sx={{ width: '250px' }}
                 label="Repeat Password"
                 variant="outlined"
                 type="password"
                 name="confirmPassword"
+                value={inputs.confirmPassword}
+                onChange={(e) => setInputs({...inputs, confirmPassword: e.target.value})}
                 required
               />
             </Box>
+
+            {/* Gender Selection */}
+            <FormControl component="fieldset" sx={{ mb: 2 }}>
+              <FormLabel component="legend">Gender</FormLabel>
+              <RadioGroup 
+              row 
+              name="gender"
+              value={inputs.gender}
+              onChange={(e) => setInputs({...inputs, gender: e.target.value})}
+              >
+                <FormControlLabel value="male" control={<Radio />} label="Boy" />
+                <FormControlLabel value="female" control={<Radio />} label="Girl" />
+              </RadioGroup>
+            </FormControl>
+
             <FormControlLabel
               control={<Checkbox name="agree-term" color="primary" />}
               label={
@@ -110,7 +153,7 @@ const SignUp = () => {
             />
             <Box sx={{ mt: 2 }}>
               <Button type="submit" variant="contained" color="primary">
-                Register
+                {loading ? "loading..." : "Register"}
               </Button>
             </Box>
           </form>
