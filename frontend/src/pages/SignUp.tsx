@@ -33,7 +33,7 @@ const SignUp = () => {
   
   if (authUser) navigate('/');
 
-  const handleSubmitForm = (e: React.FormEvent) => {
+  const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     signup(inputs);
   }
@@ -73,7 +73,7 @@ const SignUp = () => {
             Sign Up
           </Typography>
 
-          <form id="register-form" onSubmit={handleSubmitForm}>
+          <form id="register-form" onSubmit={handleRegister}>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
@@ -152,7 +152,7 @@ const SignUp = () => {
               }
             />
             <Box sx={{ mt: 2 }}>
-              <Button type="submit" variant="contained" color="primary">
+              <Button type="submit" variant="contained" color="primary" disabled={loading}>
                 {loading ? "loading..." : "Register"}
               </Button>
             </Box>

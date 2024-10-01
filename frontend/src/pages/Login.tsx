@@ -10,12 +10,26 @@ import {
 } from '@mui/material';
 import { useAuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import useLogin from '../hooks/useLogin';
 
 const Login = () => {
   const {authUser} = useAuthContext();
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const {loading, login} = useLogin();
+
   const navigate = useNavigate();
 
   if(authUser) navigate('/');
+
+  const handleLogin = async (e:React.FormEvent) => {
+    e.preventDefault();
+    login(inputs.username, inputs.password);
+  }
 
   return (
     <Container
@@ -69,7 +83,7 @@ const Login = () => {
             Log In
           </Typography>
 
-          <form id="login-form">
+          <form id="login-form" onSubmit={handleLogin}>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
@@ -77,6 +91,8 @@ const Login = () => {
                 label="Username"
                 variant="outlined"
                 name="username"
+                value={inputs.username}
+                onChange={(e) => setInputs({...inputs, username: e.target.value})}
                 required
               />
             </Box>
@@ -88,6 +104,8 @@ const Login = () => {
                 variant="outlined"
                 type="password"
                 name="password"
+                value={inputs.password}
+                onChange={(e) => setInputs({...inputs, password: e.target.value})}
                 required
               />
             </Box>
@@ -96,8 +114,8 @@ const Login = () => {
               label="Remember me"
             />
             <Box sx={{ mt: 2 }}>
-              <Button type="submit" variant="contained" color="primary">
-                Log In
+              <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                {loading? "loading..." : "Login"}
               </Button>
             </Box>
           </form>
