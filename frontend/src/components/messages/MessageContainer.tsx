@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import MessageInput from './MessageInput';
-import Messages from './Message';
+import Messages from './Messages';
 // import { MessageCircle } from "lucide-react"; // Uncomment if you need it
 
 const MessageContainer = () => {
