@@ -10,7 +10,7 @@ const generateToken = (userId: string, res: Response) => {
         maxAge: 15 * 24 * 60 * 1000,
         httpOnly: true, // prevents xss cross site scripting :D
         sameSite: "strict", // CSRF attack cross-site request forgery
-        secure: process.env.NODE_ENV !== "development" // HTTPS
+        secure: Boolean(process.env.NODE_ENV !== "development") // HTTPS
     });
 
     return token;
