@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
@@ -7,34 +7,40 @@ const useLogin = () => {
   const { setAuthUser } = useAuthContext();
 
   const login = async (username: string, password: string) => {
+    try {
+      setLoading(true);
+      const res = await fetch('http://127.0.0.1:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
-    try{
-        setLoading(true);
-        const res = await fetch('http://127.0.0.1:5000/api/auth/login', {
-            method: 'POST',
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify({username, password}),
-        })
+      const data = await res.json();
 
-        const data = await res.json();
-        console.log(data);
-
-        if(!res.ok || data.errors) {
-            throw new Error(data.errors);
+      if (!res.ok || data.errors) {
+        if (data.error) {
+          toast.error(data.error);
+          return;
         }
 
-        setAuthUser(data);
-    }catch(error){
-        if (error instanceof Error) {
-            console.log(error.message);
-            toast.error(error.message);
-          } 
-    }finally{
-        setLoading(false);
+        data.errors?.forEach((error: { msg: string }) => {
+          toast.error(error.msg); // Display each error message
+        });
+        return;
+      }
+
+      setAuthUser(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error('An unexpected error occurred. Please try again.');
+      }
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  return {loading, login}
-}
+  return { loading, login };
+};
 
-export default useLogin
+export default useLogin;

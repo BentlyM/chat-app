@@ -1,65 +1,72 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import toast from 'react-hot-toast';
 
-type AuthUserType = {
-	id: string;
-	fullName: string;
-	email: string;
-	profilePic: string;
-	gender: string;
-};
+interface AuthUserType {
+  id: string;
+  fullName: string;
+  username: string;
+  gender: string;
+}
 
 const AuthContext = createContext<{
-	authUser: AuthUserType | null;
-	setAuthUser: Dispatch<SetStateAction<AuthUserType | null>>;
-	isLoading: boolean;
+  authUser: AuthUserType | null;
+  setAuthUser: Dispatch<SetStateAction<AuthUserType | null>>;
+  isLoading: boolean;
 }>({
-	authUser: null,
-	setAuthUser: () => {},
-	isLoading: true,
+  authUser: null,
+  setAuthUser: () => {},
+  isLoading: true,
 });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = () => {
-	return useContext(AuthContext);
+  return useContext(AuthContext);
 };
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-	const [authUser, setAuthUser] = useState<AuthUserType | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+  const [authUser, setAuthUser] = useState<AuthUserType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-	// logic will go here
-	useEffect(() => {
-		const fetchAuthUser = async () => {
-			try {
-				const res = await fetch("http://127.0.0.1:5000/api/auth/me");
-				const data = await res.json();
-				if (!res.ok) {
-					throw new Error(data.error);
-				}
-				setAuthUser(data);
-			} catch (error) {
-				console.error(error);
-                if(error instanceof Error){
-                    toast.error(error.message);
-                }
-			} finally {
-				setIsLoading(false);
-			}
-		};
+  // logic will go here
+  useEffect(() => {
+    const fetchAuthUser = async () => {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/auth/me');
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error);
+        }
+        setAuthUser(data);
+      } catch (error) {
+        console.error(error);
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-		fetchAuthUser();
-	}, []);
+    fetchAuthUser();
+  }, []);
 
-	return (
-		<AuthContext.Provider
-			value={{
-				authUser,
-				isLoading,
-				setAuthUser,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+  return (
+    <AuthContext.Provider
+      value={{
+        authUser,
+        isLoading,
+        setAuthUser,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

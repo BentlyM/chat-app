@@ -8,7 +8,7 @@ type SignUpInputs = {
   password: string;
   confirmPassword: string;
   gender: string;
-  error? : object
+  error?: object;
 };
 
 const useSignup = () => {
@@ -28,15 +28,24 @@ const useSignup = () => {
 
       const data = await res.json();
 
-      console.log(data);
+      if (!res.ok || data.errors) {
+        if (data.error) {
+          toast.error(data.error);
+          return;
+        }
 
-      if (!res.ok || data.error) throw new Error(data.error);
+        data.errors?.forEach((error: { msg: string }) => {
+          toast.error(error.msg); // Display each error message
+        });
+        return;
+      }
+
       setAuthUser(data);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);
-        toast.error(error.message);
-      } 
+        toast.error('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
