@@ -39,7 +39,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/api/api/auth/me', {
+        const res = await fetch('/api/auth/me', {
           method: 'GET',
           credentials: 'include',
         });

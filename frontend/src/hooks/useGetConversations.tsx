@@ -10,7 +10,7 @@ const useGetConversations = () => {
     (async () => {
         setLoading(true);
         try{
-            const res = await fetch('api/api/messages/conversations',{
+            const res = await fetch('/api/messages/conversations',{
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
