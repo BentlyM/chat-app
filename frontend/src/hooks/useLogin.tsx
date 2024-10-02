@@ -19,8 +19,8 @@ const useLogin = () => {
         const data = await res.json();
         console.log(data);
 
-        if(!res.ok || data.error) {
-            throw new Error(data.error);
+        if(!res.ok || data.errors) {
+            throw new Error(data.errors);
         }
 
         setAuthUser(data);
