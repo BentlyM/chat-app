@@ -28,13 +28,13 @@ const corsOptions: CorsOptions = {
 
 const PORT = +(process.env.PORT || 5000);
 
-app.use(cookieParser());
+app.use(cookieParser('jwt'));
 app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.listen(PORT, ()=>{
+app.listen(PORT, 'localhost', ()=>{
     console.log(`server is running on ${PORT}`)
 })

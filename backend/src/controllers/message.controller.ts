@@ -52,7 +52,7 @@ export const sendMessage = async (req: Request, res: Response) => {
 
 
         // socket io will go here
-        return res.json(201).json(newMessage);
+        return res.status(201).json(newMessage);
     }catch(error: any){
         console.error("Error in sendMessage", error.message);
         return res.status(500).json({error: "Internal server error"})

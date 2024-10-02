@@ -21,7 +21,8 @@ declare global {
 
 const protectRoute = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.cookies.jwt;
+        const token = req.signedCookies.jwt;
+        console.log(token);
 
         if (!token) return res.status(401).json({ error: "Unauthorized - No token provided" });
 
@@ -39,7 +40,6 @@ const protectRoute = async (req: Request, res: Response, next: NextFunction) => 
         }
 
         req.user = user;
-        console.log('they have access and can move on...')
         next();
     } catch (error: any) {
         console.log("Error in protectRoute middleware:", error.message);

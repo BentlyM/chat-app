@@ -37,11 +37,11 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   // logic will go here
   useEffect(() => {
-    const fetchAuthUser = async () => {
+    (async () => {
       try {
-        const res = await fetch('http://127.0.0.1:5000/api/auth/me', {
+        const res = await fetch('/api/api/auth/me', {
           method: 'GET',
-          credentials: 'include'
+          credentials: 'include',
         });
         const data = await res.json();
         if (!res.ok) {
@@ -56,9 +56,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       } finally {
         setIsLoading(false);
       }
-    };
-
-    fetchAuthUser();
+    })();
   }, []);
 
   return (

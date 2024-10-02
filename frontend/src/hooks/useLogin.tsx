@@ -9,10 +9,11 @@ const useLogin = () => {
   const login = async (username: string, password: string) => {
     try {
       setLoading(true);
-      const res = await fetch('http://127.0.0.1:5000/api/auth/login', {
+      const res = await fetch('/api/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
+        credentials: 'include'
       });
 
       const data = await res.json();

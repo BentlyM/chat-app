@@ -10,7 +10,13 @@ const useGetConversations = () => {
     (async () => {
         setLoading(true);
         try{
-            const res = await fetch('http://127.0.0.1:5000/api/messages/conversations');
+            const res = await fetch('api/api/messages/conversations',{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
             const data = await res.json();
             if(data.error){
                 throw new Error(data.error);

@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://0.0.0.0:5000', // Backend server address
+        target: 'http://localhost:5000', // Backend server address
         changeOrigin: true, // For virtual hosted sites
         rewrite: (path) => path.replace(/^\/api/, ''), // Optional: rewrite path if needed
       },
