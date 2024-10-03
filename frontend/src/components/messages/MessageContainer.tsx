@@ -2,9 +2,8 @@ import { Box, Typography } from '@mui/material';
 import MessageInput from './MessageInput';
 import Messages from './Messages';
 import useConversation from '../../zustand/useConversation';
-import { MessageCircle } from 'lucide-react';
 import { useAuthContext } from '../../context/AuthContext';
-// import { MessageCircle } from "lucide-react"; // Uncomment if you need it
+import { MessageCircle } from "lucide-react"
 
 const MessageContainer = () => {
     const { selectedConversation } = useConversation();
@@ -16,7 +15,7 @@ const MessageContainer = () => {
                     {/* Header */}
                     <Box sx={{ backgroundColor: '#64748B', paddingX: 2, paddingY: 1, marginBottom: 2 }}>
                         <Typography variant="body1" color="textSecondary">
-                            To: <strong style={{ color: '#1F2937' }}>John Doe</strong>
+                            To: <strong style={{ color: '#1F2937' }}>{selectedConversation.fullName}</strong>
                         </Typography>
                     </Box>
 
