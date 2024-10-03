@@ -1,22 +1,27 @@
 import React from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
+import { AuthUserType } from '../../context/AuthContext';
+import { ConversationType } from '../../zustand/useConversation';
+import { formatDate } from '../../misc/formateData';
 
 interface MessageProps {
 	message?: {
 		senderId: string; // ID of the user who sent the message
 		body: string;     // Message content
-		id: string;       // Unique ID for the message
+		id: string; 
+		createdAt: string;      // Unique ID for the message
 	};
-	currentUserId: string; // ID of the current user
+	currentUser: AuthUserType; // ID of the current user
+	selectedConversation: ConversationType | null;
 }
 
-const Message: React.FC<MessageProps> = ({ message, currentUserId }) => {
+const Message: React.FC<MessageProps> = ({ message, currentUser, selectedConversation }) => {
 	if (!message) return null; // Handle case when message is undefined
 
-	const fromMe = message.senderId === currentUserId; // Check if the senderId matches the current user's ID
+	const fromMe = message.senderId === currentUser.id; // Check if the senderId matches the current user's ID
 	const img = fromMe
-		? "https://avatar.iran.liara.run/public/boy?username=johndoe" // Replace with dynamic username logic
-		: "https://avatar.iran.liara.run/public/boy?username=janedoe"; // Replace with dynamic username logic
+		? currentUser?.profilePic // Replace with dynamic username logic
+		: selectedConversation?.profilePic; // Replace with dynamic username logic
 
 	return (
 		<Box
@@ -55,7 +60,7 @@ const Message: React.FC<MessageProps> = ({ message, currentUserId }) => {
 			)}
 			<Typography variant="caption" sx={{ opacity: 0.5, marginLeft: 1, color: 'white' }}>
 				{/* You can replace this static time with dynamic timestamp logic if needed */}
-				22:59
+				{formatDate(message.createdAt)}
 			</Typography>
 		</Box>
 	);

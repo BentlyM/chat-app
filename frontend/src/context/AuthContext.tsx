@@ -9,11 +9,12 @@ import {
 } from 'react';
 import toast from 'react-hot-toast';
 
-interface AuthUserType {
+export interface AuthUserType {
   id: string;
   fullName: string;
   username: string;
   gender: string;
+  profilePic: string;
 }
 
 const AuthContext = createContext<{
@@ -47,6 +48,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         if (!res.ok) {
           throw new Error(data.error);
         }
+        console.log(` current user`, data);
         setAuthUser(data);
       } catch (error) {
         console.error(error);
