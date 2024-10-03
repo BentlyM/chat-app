@@ -1,6 +1,7 @@
 import {useEffect, useRef} from 'react';
+import { MessageType } from '../zustand/useConversation';
 
-function useChatScroll(dep) {
+function useChatScroll(dep: MessageType[]) {
     const ref = useRef<HTMLElement>();
 
     useEffect(() => {
