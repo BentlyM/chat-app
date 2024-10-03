@@ -1,12 +1,16 @@
 import { Box } from '@mui/material';
-import { DUMMY_MESSAGES } from '../../dummy_data/dummy';
 import Message from './Message';
+import useGetMessages from '../../hooks/useGetMessages';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Messages = () => {
+	const {loading, messages}= useGetMessages();
+	const {authUser} = useAuthContext();
+
 	return (
 		<Box sx={{ paddingX: 2, flex: 1, overflowY: 'auto' }}>
-			{DUMMY_MESSAGES.map((message: { body: string; fromMe: boolean; id: number } | undefined) => (
-				<Message key={message?.id} message={message} />
+			{messages.map((message) => (
+				<Message key={message?.id} message={message} currentUserId={authUser!.id}  />
 			))}
 		</Box>
 	);
