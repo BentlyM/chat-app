@@ -5,8 +5,8 @@ import cors, { CorsOptions } from 'cors';
 
 import authRoutes from './routes/auth.route';
 import messageRoutes from './routes/message.route';
+import { app, server } from './socket/socket';
 
-const app = express();
 
 const allowedOrigins = [
     'http://localhost:5173',
@@ -34,6 +34,6 @@ app.use(cors(corsOptions));
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-app.listen(PORT, 'localhost', ()=>{
+server.listen(PORT, 'localhost', ()=>{
     console.log(`server is running on ${PORT}`)
 })
