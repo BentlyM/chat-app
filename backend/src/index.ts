@@ -25,7 +25,6 @@ const corsOptions: CorsOptions = {
 };
 
 const PORT = +(process.env.PORT || 5000);
-const __dirname = path.resolve();
 
 app.use(cookieParser('jwt'));
 app.use(express.json());
