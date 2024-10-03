@@ -36,8 +36,6 @@ const Conversation = ({ conversation }: { conversation: ConversationType }) => {
   const { onlineUsers } = useSocketContext();
   const [isOnline, setIsOnline] = useState<boolean>(false);
 
-  console.log(`isOnline: ${isOnline}`);
-
   useEffect(() => {
     // Check if the conversation user is online
     setIsOnline(onlineUsers.includes(conversation.id));
