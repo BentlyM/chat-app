@@ -28,7 +28,7 @@ export const useSocketContext = (): ISocketContext => {
   return context;
 };
 
-const socketURL = process.env.NODE_ENV === 'development'  ? 'https://chat-app-0yco.onrender.com' : '/';
+const socketURL = process.env.NODE_ENV === 'development'  ? 'http://localhost:5000' : '/';
 
 const SocketContextProvider = ({ children }: { children: ReactNode }) => {
   const socketRef = useRef<Socket | null>(null);
