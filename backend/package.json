@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "buildAlt": "rimraf dist && tsc && copyfiles -u 1 src/views/**/* dist && copyfiles -u 1 src/public/**/* dist && copyfiles -u 1 src/public/* dist",
-    "build":"tsc && npm install && prisma generate --schema=./prisma/schema.prisma && npm install --prefix ../frontend && npm run build --prefix ../frontend",
+    "build":" npm install && rimraf dist && tsc && prisma generate --schema=./prisma/schema.prisma && npm install --prefix ../frontend && npm run build --prefix ../frontend",
     "dev": "ts-node-dev --respawn src/index.ts",
     "start": "node dist/index.js",
     "clean": "rimraf dist",
@@ -29,7 +29,9 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4",
-    "uuid": "^10.0.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
