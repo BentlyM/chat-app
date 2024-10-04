@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && tsc && copyfiles -u 1 src/views/**/* dist && copyfiles -u 1 src/public/**/* dist && copyfiles -u 1 src/public/* dist",
+    "buildAlt": "rimraf dist && tsc && copyfiles -u 1 src/views/**/* dist && copyfiles -u 1 src/public/**/* dist && copyfiles -u 1 src/public/* dist",
+    "build":"tsc && npm install && prisma generate --schema=./prisma/schema.prisma && npm install --prefix ../frontend && npm run build --prefix ../frontend",
     "dev": "ts-node-dev --respawn src/index.ts",
     "start": "node dist/index.js",
     "clean": "rimraf dist",
