@@ -7,7 +7,7 @@ import authRoutes from './routes/auth.route';
 import messageRoutes from './routes/message.route';
 import { app, server } from './socket/socket';
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5000'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5000', 'https://chat-app-0yco.onrender.com'];
 
 // CORS
 const corsOptions: CorsOptions = {
