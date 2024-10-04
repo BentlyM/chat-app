@@ -3,6 +3,11 @@
 
 The backend API is designed to handle authentication, messaging, and user management. The API is organized into two main routes: `/api/auth` and `/api/messages`.
 
+## Base URL
+```
+https://chat-app-0yco.onrender.com/login
+```
+
 ## Authentication Routes
 ### `/api/auth`
 
